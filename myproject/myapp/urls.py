@@ -14,14 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
-from HarvestHaven import views
+from myapp import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('tools/' , views.tools_list),
-    path('seeds/' , views.seeds_list),
-    path('items/' , views.inventory_list),
-    path('money/' , views.money_list),
+    path('', views.hello, name='index'), #this will response with hello world
+    path('tools/', views.tools_list),
+    path('seeds/', views.seeds_list),
+    path('inventory/', views.inventory_list),
+    path('money/', views.money_list),
 ]
