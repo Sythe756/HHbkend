@@ -10,13 +10,12 @@ from .serializers import ToolsSerializer, SeedInventorySerializer, InventorySeri
 from django.http import JsonResponse
 from .models import *
 from .serializers import *
+from django.http import HttpResponse
 
-# says hello
-class HelloWorld(APIView):
-    def get(self, request):
-        return Response("Hello World!")
-
-
+# says hello in http body
+def hello(request):
+    return HttpResponse("Hello, world.")
+    
 
 def tools_list(request):
     tools = Tools.objects.all()
