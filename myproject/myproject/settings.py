@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 import environ
 import dj_database_url
+from dotenv import load_dotenv
+load_dotenv()
+
 
 env = environ.Env()
 environ.Env.read_env()
@@ -26,10 +29,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5%$jp9%ih(_lgv5a2)r**&p*ni8ubu@wez!mtnv=7mmb)^jf6c'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG',default=False)
 
 ALLOWED_HOSTS = []
 
@@ -86,10 +89,13 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+DATABASE_URL = os.getenv('DATABASE_URL')
 
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-}
+DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
+
+
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
