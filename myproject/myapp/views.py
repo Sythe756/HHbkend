@@ -5,12 +5,17 @@ from rest_framework import status
 from django.http import Http404
 from .models import Tools, SeedInventory, Inventory, Money
 from .serializers import ToolsSerializer, SeedInventorySerializer, InventorySerializer, MoneySerializer
-
 # Create your views here.
 
 from django.http import JsonResponse
 from .models import *
 from .serializers import *
+
+# says hello
+class HelloWorld(APIView):
+    def get(self, request):
+        return Response("Hello World!")
+
 
 
 def tools_list(request):

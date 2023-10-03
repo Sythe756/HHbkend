@@ -18,6 +18,7 @@ from django.urls import path
 from myapp import views
 
 urlpatterns = [
+    path('', views.HelloWorld, name='index'), #this will response with hello world
     path('tools/', views.tools_list),
     path('seeds/', views.seeds_list),
     path('inventory/', views.inventory_list),
