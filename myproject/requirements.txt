@@ -1,4 +1,4 @@
 django
 python-dotenv
 gunicorn
-
+dj-database-url
