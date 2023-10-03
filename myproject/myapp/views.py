@@ -17,22 +17,36 @@ def hello(request):
     return HttpResponse("Hello, world.")
     
 
-def tools_list(request):
-    tools = Tools.objects.all()
-    toolsSerializer = ToolsSerializer(tools, many=True)
-    return JsonResponse(toolsSerializer.data, safe=False)
+class Toollist(APIView):
+    def get(self, request):
+        tools = Tools.objects.all()
+        serializer = ToolsSerializer(tools, many=True)
+        return Response(serializer.data)
 
-def seeds_list(request):
-    seeds = SeedInventory.objects.all()
-    seedsSerializer = SeedInventorySerializer(seeds, many=True)
-    return JsonResponse(seedsSerializer.data, safe=False)
+class Seedlist(APIView):
+    def get(self, request):
+        seeds = SeedInventory.objects.all()
+        serializer = SeedInventorySerializer(seeds, many=True)
+        return Response(serializer.data)
 
-def inventory_list(request):
-    inventory = Inventory.objects.all()
-    inventorySerializer = InventorySerializer(inventory, many=True)
-    return JsonResponse(inventorySerializer.data, safe=False)
+class Inventorylist(APIView):
+    def get(self, request):
+        inventory = Inventory.objects.all()
+        serializer = InventorySerializer(inventory, many=True)
+        return Response(serializer.data)
 
-def money_list(request):
-    money = Money.objects.all()
-    moneySerializer = MoneySerializer(money, many=True)
-    return JsonResponse(moneySerializer.data, safe=False)
+class Moneylist(APIView):
+    def get(self, request):
+        money = Money.objects.all()
+        serializer = MoneySerializer(money, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = MoneySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+
